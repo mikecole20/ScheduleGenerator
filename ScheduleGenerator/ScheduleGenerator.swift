@@ -2,7 +2,31 @@ import ArgumentParser
 
 @main
 struct ScheduleGenerator: ParsableCommand {
-  @Option(name: .shortAndLong, help: "Provide a custom seed to get a stable schedule.")
+  static var configuration = CommandConfiguration(
+    commandName: "ScheduleGenerator",
+    abstract: "Generate college football schedules with reproducible, seeded randomization.",
+    discussion: """
+    ScheduleGenerator creates non-conference football schedules for SEC teams against teams 
+    from various conferences. The tool ensures required rivalry games are scheduled and 
+    randomly assigns remaining matchups using a seeded random number generator for reproducibility.
+    
+    Required Matchups:
+    - Florida vs. Florida State
+    - Georgia vs. Georgia Tech
+    - South Carolina vs. Clemson
+    
+    Schedule Rules:
+    - Florida and Georgia play 2 non-conference games (they must play each other)
+    - All other teams play 3 non-conference games
+    - Each team has exactly one away game designated randomly
+    - No CPU team is scheduled against multiple user teams
+    
+    Use --help or -h to see this help message.
+    """,
+    version: "1.0.0"
+  )
+  
+  @Option(name: .shortAndLong, help: "Provide a custom seed to generate a stable, reproducible schedule. If not provided, a random seed will be used and displayed.")
   var seed: Int? = nil
 
   mutating func run() throws(ScheduleGeneratorError) {
