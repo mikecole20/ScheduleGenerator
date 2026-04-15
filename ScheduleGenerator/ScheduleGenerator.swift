@@ -2,7 +2,7 @@ import ArgumentParser
 
 @main
 struct ScheduleGenerator: ParsableCommand {
-  static var configuration = CommandConfiguration(
+  static let configuration = CommandConfiguration(
     commandName: "ScheduleGenerator",
     abstract: "Generate college football schedules with reproducible, seeded randomization.",
     discussion: """
@@ -16,14 +16,13 @@ struct ScheduleGenerator: ParsableCommand {
     - South Carolina vs. Clemson
     
     Schedule Rules:
-    - Florida and Georgia play 2 non-conference games (they must play each other)
-    - All other teams play 3 non-conference games
+    - All teams play 3 non-conference games
     - Each team has exactly one away game designated randomly
     - No CPU team is scheduled against multiple user teams
     
     Use --help or -h to see this help message.
     """,
-    version: "1.0.0"
+    version: "1.0.1"
   )
   
   @Option(name: .shortAndLong, help: "Provide a custom seed to generate a stable, reproducible schedule. If not provided, a random seed will be used and displayed.")
@@ -59,15 +58,7 @@ struct ScheduleGenerator: ParsableCommand {
 
     // Build a schedule for each team
     for userTeam in UserTeam.allCases.sorted() {
-      let gamesToSchedule = switch userTeam {
-      case .florida,
-           .georgia:
-        // Florida and Georgia must play each other.
-        // This can be removed when they're in the same conference.
-        2
-      default:
-        3
-      }
+      let gamesToSchedule = 3
 
       // Get copy of existing schedule
       guard var teamSchedule = schedules[userTeam] else {

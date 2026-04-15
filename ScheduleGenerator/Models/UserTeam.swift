@@ -8,7 +8,6 @@ enum UserTeam: String, CaseIterable {
   case miami = "Miami"
   case mississippiState = "Mississippi State"
   case missouri = "Missouri"
-  case northCarolina = "North Carolina"
   case oklahoma = "Oklahoma"
   case oleMiss = "Ole Miss"
   case southCarolina = "South Carolina"
