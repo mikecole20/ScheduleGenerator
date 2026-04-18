@@ -95,8 +95,7 @@ at Florida State
 
 ## Schedule Rules
 
-- **Florida** and **Georgia** play 2 non-conference games (they must play each other)
-- All other teams play 3 non-conference games
+- All teams play 3 non-conference games
 - Required rivalry games are automatically scheduled:
   - Florida vs. Florida State
   - Georgia vs. Georgia Tech
